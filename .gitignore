@@ -1,0 +1,103 @@
+# ========================================
+# A股自选股智能分析系统 - Git忽略文件配置
+# ========================================
+
+# 敏感配置文件（必须忽略，包含API Key）
+.env
+.env.local
+.env.*.local
+
+# Python相关
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+ENV/
+env/
+.venv/
+
+# IDE配置
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 测试和覆盖率
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# 日志文件
+logs/*.log
+*.log
+
+# 数据库文件
+data/*.db
+data/*.lock
+data/*.sqlite
+data/*.sqlite3
+
+# 缓存
+.cache/
+*.cache
+
+# 临时文件
+*.tmp
+*.bak
+*.swp
+tmp/
+
+# Node.js (apps目录)
+node_modules/
+.npm
+.yarn/
+.pnp/
+.pnp.js
+
+# Next.js (apps/dsa-web)
+.next/
+out/
+build/
+dist/
+
+# 报告文件（可选，如果不希望提交生成的报告）
+reports/*.md
+reports/*.html
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 系统文件
+Thumbs.db
+Desktop.ini
+
+# 打包文件
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
