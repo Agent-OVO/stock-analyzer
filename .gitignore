@@ -1,13 +1,10 @@
-# ========================================
-# A股自选股智能分析系统 - Git忽略文件配置
-# ========================================
-
-# 敏感配置文件（必须忽略，包含API Key）
+# 敏感配置（不要提交到Git）
 .env
 .env.local
-.env.*.local
+*.key
+*_secret*
 
-# Python相关
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -29,14 +26,23 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-# 虚拟环境
+*.manifest
+*.spec
 venv/
 ENV/
 env/
-.venv/
+.venv
 
-# IDE配置
+# 数据和日志
+data/*.db
+data/*.lock
+data/*.sqlite
+logs/*.log
+*.log
+reports/*.md
+!reports/.gitkeep
+
+# IDE
 .vscode/
 .idea/
 *.swp
@@ -44,60 +50,33 @@ env/
 *~
 .DS_Store
 
-# 测试和覆盖率
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 测试
 .pytest_cache/
 .coverage
 htmlcov/
 .tox/
-.hypothesis/
 
-# 日志文件
-logs/*.log
-*.log
-
-# 数据库文件
-data/*.db
-data/*.lock
-data/*.sqlite
-data/*.sqlite3
-
-# 缓存
-.cache/
-*.cache
+# Node.js
+node_modules/
+.npm
+dist/
+.yarn/
+.pnp.*
 
 # 临时文件
 *.tmp
 *.bak
-*.swp
-tmp/
+*.backup
+*.cache
 
-# Node.js (apps目录)
-node_modules/
-.npm
-.yarn/
-.pnp/
-.pnp.js
-
-# Next.js (apps/dsa-web)
-.next/
-out/
-build/
-dist/
-
-# 报告文件（可选，如果不希望提交生成的报告）
-reports/*.md
-reports/*.html
-
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# 系统文件
+ # Windows
 Thumbs.db
-Desktop.ini
+desktop.ini
 
-# 打包文件
-*.zip
-*.tar
-*.tar.gz
-*.rar
-*.7z
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
