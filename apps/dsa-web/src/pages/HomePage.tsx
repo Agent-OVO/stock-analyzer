@@ -7,7 +7,6 @@ import { StockAutocomplete } from '../components/StockAutocomplete';
 import { HistoryList } from '../components/history';
 import { ReportMarkdown, ReportSummary } from '../components/report';
 import { TaskPanel } from '../components/tasks';
-import { NewsList } from '../components/news';
 import { useDashboardLifecycle, useHomeDashboardState } from '../hooks';
 import { getReportText, normalizeReportLanguage } from '../utils/reportLanguage';
 
@@ -15,7 +14,6 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [sidebarTab, setSidebarTab] = useState<'history' | 'news'>('history');
 
   const {
     query,
@@ -107,58 +105,37 @@ const HomePage: React.FC = () => {
   const sidebarContent = useMemo(
     () => (
       <div className="flex min-h-0 h-full flex-col gap-3 overflow-hidden">
-        {/* Tab buttons */}
-        <div className="flex gap-1 rounded-lg bg-muted p-1">
-          <button
-            onClick={() => setSidebarTab('history')}
-            className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
-              sidebarTab === 'history'
-                ? 'bg-background text-foreground shadow-sm'
-                : 'text-secondary-text hover:text-foreground'
-            }`}
-          >
-            历史记录
-          </button>
-          <button
-            onClick={() => setSidebarTab('news')}
-            className={`flex-1 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
-              sidebarTab === 'news'
-                ? 'bg-background text-foreground shadow-sm'
-                : 'text-secondary-text hover:text-foreground'
-            }`}
-          >
-            资讯动态
-          </button>
+        {/* Header */}
+        <div className="flex items-center justify-between px-1">
+          <h3 className="text-sm font-semibold text-foreground">历史记录</h3>
+          <span className="text-xs text-secondary-text">
+            {historyItems.length} 条
+          </span>
         </div>
 
-        {sidebarTab === 'history' ? (
-          <>
-            <TaskPanel tasks={activeTasks} />
-            <HistoryList
-              items={historyItems}
-              isLoading={isLoadingHistory}
-              isLoadingMore={isLoadingMore}
-              hasMore={hasMore}
-              selectedId={selectedReport?.meta.id}
-              selectedIds={selectedIds}
-              isDeleting={isDeletingHistory}
-              onItemClick={handleHistoryItemClick}
-              onLoadMore={() => void loadMoreHistory()}
-              onToggleItemSelection={toggleHistorySelection}
-              onToggleSelectAll={toggleSelectAllVisible}
-              onDeleteSelected={() => setShowDeleteConfirm(true)}
-              className="flex-1 overflow-hidden"
-            />
-          </>
-        ) : (
-          <NewsList limit={8} className="flex-1 overflow-hidden" />
-        )}
+        <TaskPanel tasks={activeTasks} />
+        <HistoryList
+          items={historyItems}
+          isLoading={isLoadingHistory}
+          isLoadingMore={isLoadingMore}
+          hasMore={hasMore}
+          selectedId={selectedReport?.meta.id}
+          selectedIds={selectedIds}
+          isDeleting={isDeletingHistory}
+          onItemClick={handleHistoryItemClick}
+          onLoadMore={() => void loadMoreHistory()}
+          onToggleItemSelection={toggleHistorySelection}
+          onToggleSelectAll={toggleSelectAllVisible}
+          onDeleteSelected={() => setShowDeleteConfirm(true)}
+          className="flex-1 overflow-hidden"
+        />
       </div>
     ),
     [
       activeTasks,
       hasMore,
       historyItems,
+      historyItems.length,
       isDeletingHistory,
       isLoadingHistory,
       isLoadingMore,
@@ -166,7 +143,6 @@ const HomePage: React.FC = () => {
       loadMoreHistory,
       selectedIds,
       selectedReport?.meta.id,
-      sidebarTab,
       toggleHistorySelection,
       toggleSelectAllVisible,
     ],

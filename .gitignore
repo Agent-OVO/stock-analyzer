@@ -66,6 +66,12 @@ dist/
 .yarn/
 .pnp.*
 
+# Frontend build artifacts in static/
+static/assets/*.js
+static/assets/*.css
+static/assets/*.map
+!static/assets/.gitkeep
+
 # 临时文件
 *.tmp
 *.bak
